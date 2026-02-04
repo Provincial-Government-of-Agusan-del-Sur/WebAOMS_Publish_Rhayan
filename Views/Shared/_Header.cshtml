@@ -1,5 +1,4 @@
 ﻿@using WebAOMS.Models;
-@using WebAOMS.Base;
 @{
 
     var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -14,14 +13,13 @@
         }
         else
         {
-            //ViewBag.pictureLocaltion = Url.Content("~/Content/UserImage/50x50/NoPicture.png?"); //mp
-            ViewBag.pictureLocaltion = "https://pgas.ph/hris/content/images/photos/"+ USER.C_eID + ".png" + "?timestamp=" + DateTime.Now.ToString(@"dd\hh\mm\ss"); //xXx
+            ViewBag.pictureLocaltion = Url.Content("~/Content/UserImage/50x50/NoPicture.png?");
         }
 
     }
 
 
-    }
+}
 <script>
     function clickLogout() {
         var url = "@Url.Content("~/Account/LogOff")";
