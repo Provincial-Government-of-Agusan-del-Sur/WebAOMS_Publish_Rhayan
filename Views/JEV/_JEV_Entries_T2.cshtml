@@ -1,0 +1,26 @@
+﻿@(Html.Kendo().Grid<WebAOMS.Models.Maintenance.grid_accountantadvice>()
+    .Name("grid_transactions_acic")
+    .Columns(columns =>
+    {
+        columns.Bound(m => m.jevid).Width(40).Hidden().Title("TransNo").HtmlAttributes(new { style = "text-align:center" }).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Bound(m => m.AdviceNo).Width(100).Title("Advice No.");
+        columns.Bound(m => m.ChkBankAccntNo).Width(90).Title("Bank Account");
+        columns.Bound(m => m.Checkno).Width(90).Title("Check No.");
+        columns.Bound(m => m.CheckDate).Width(90).Format("{0:MM/dd/yyyy}");
+        columns.Bound(m => m.Name).Width(190).Title("Payee");
+        columns.Bound(m => m.ChkAmount).Title("Check Amount").Width(80).Format("{0:N2}").HtmlAttributes(new { style = "text-align:right" });
+        columns.Bound(m => m.Filename).Width(150).Title("File Name");
+    })
+    .AutoBind(true)
+    .HtmlAttributes(new { style = "height: 350px;" })
+    .Scrollable()
+    .Sortable()
+    .Pageable(pageable => pageable
+    .Refresh(true)
+    .ButtonCount(5))
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .Read(read => read.Action("grid_transaction_acic", "JEV").Data("para_transaction"))
+    .PageSize(200)
+    )
+)

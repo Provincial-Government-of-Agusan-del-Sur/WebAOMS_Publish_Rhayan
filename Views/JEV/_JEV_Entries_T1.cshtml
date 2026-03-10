@@ -1,0 +1,33 @@
+﻿@(Html.Kendo().Grid<WebAOMS.Models.Maintenance.grid_accountantadvice>()
+@*@(Html.Kendo().Grid<WebAOMS.Models.ufn_AA_get_transaction_byDate>()*@
+    .Name("grid_transactions")
+    .Columns(columns =>
+    {
+    columns.Template(@<text></text>)
+        .ClientTemplate("<input id='check#=jevid#' type='checkbox' style='zoom:1.0;cursor:pointer;'  title='Tick the checkbox to include this in generating the ACIC file!'  class='checkbox'/>")
+        .Title("<input onclick=CheckAll_Prep(this) type='checkbox' title='Tick all the boxes!' class='checkbox'/> <span style='text - align:center; vertical - align:middle; height: 30px;'></span> ")
+        .Width(20)
+        .HtmlAttributes(new { style = "text-align:center;vertical-align:middle;" })
+        .HeaderHtmlAttributes(new { style = "text-align:center;vertical-align:middle;zoom:1.0;" });
+
+        columns.Bound(m => m.jevid).Width(40).Hidden().Title("TransNo").HtmlAttributes(new { style = "text-align:center" }).HeaderHtmlAttributes(new { style = "text-align:center" });
+        columns.Bound(m => m.AdviceNo).Width(90).Title("Advice No.");
+        columns.Bound(m => m.ChkBankAccntNo).Width(80).Title("Bank Account");
+        columns.Bound(m => m.Checkno).Width(90).Title("Check No.");
+        columns.Bound(m => m.CheckDate).Width(70).Format("{0:MM/dd/yyyy}");
+        columns.Bound(m => m.Name).Width(190).Title("Payee");
+        columns.Bound(m => m.ChkAmount).Title("Check Amount").Width(90).Format("{0:N2}").HtmlAttributes(new { style = "text-align:right" });
+    })
+    .AutoBind(true)
+    .HtmlAttributes(new { style = "height: 350px;" })
+    .Scrollable()
+    .Sortable()
+    .Pageable(pageable => pageable
+    .Refresh(true)
+    .ButtonCount(5))
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .Read(read => read.Action("grid_accountantadvice_transaction", "JEV").Data("para_transaction"))
+    .PageSize(500)
+    )
+)
