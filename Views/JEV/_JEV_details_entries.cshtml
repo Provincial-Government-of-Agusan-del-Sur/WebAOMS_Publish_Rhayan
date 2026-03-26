@@ -327,7 +327,12 @@
                             columns.Bound(c => c.AccountChildName).Title("Account Name").Width(400);
 
                             columns.Bound(c => c.debit).Width(100).Title("Debit").HtmlAttributes(new { style = "text-align:right" }).HeaderHtmlAttributes(new { Style = "text-align:center" })
-                                 .ClientTemplate("<div id=\"div_debit_#=ChartAccountChildID#\"><button type=\"button\" style='text-align:right' onclick=\"edit_subentries(#=ChartAccountChildID#)\" class=\"k-button DebitCredit\">#=addCommas(debit)#</button></div>")
+                             .ClientTemplate("<div id=\"div_debit_#=ChartAccountChildID#\"><button type=\"button\" style='text-align:right' onclick=\"edit_subentries(#=ChartAccountChildID#)\" class=\"k-button DebitCredit\">#=addCommas(debit)#</button></div>")
+                                //.ClientTemplate(
+                                //   "<button type='button' class='k-button DebitCredit' " +
+                                //   "onclick='edit_subentries(#=ChartAccountChildID#)' style='width:100%;text-align:right'>" +
+                                //   "#= credit == 0 ? '' : kendo.toString(credit,'n2') #" +
+                                //   "</button>")
                                 .ClientFooterTemplate("<div style='text-align:right'><b>#=kendo.toString(sum, 'n2')#</b></div>");
 
                             columns.Bound(c => c.credit).Width(100).Title("Credit").HtmlAttributes(new { style = "text-align:right" }).HeaderHtmlAttributes(new { Style = "text-align:center" })
